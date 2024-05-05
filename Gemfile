@@ -36,6 +36,7 @@ gem "bootsnap", require: false
 # gem "rack-cors"
 
 gem "dotenv-rails", "3.1.1"
+gem 'rubocop', '1.63.4', require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
