@@ -38,6 +38,7 @@ gem 'bootsnap', require: false
 # gem "rack-cors"
 
 gem 'dotenv-rails', '3.1.1'
+gem 'interactor-initializer', '1.2.0'
 gem 'rubocop', '1.63.4', require: false
 gem 'rubocop-rails', '2.24.1', require: false
 
