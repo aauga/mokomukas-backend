@@ -37,11 +37,13 @@ gem "bootsnap", require: false
 
 gem "dotenv-rails", "3.1.1"
 gem 'rubocop', '1.63.4', require: false
+gem 'rubocop-rails', '2.24.1', require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
   gem 'rspec-rails', '6.1.2'
+  gem 'rubocop-rspec', '2.29.2', require: false
 end
 
 group :development do
