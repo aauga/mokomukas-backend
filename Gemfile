@@ -44,6 +44,7 @@ gem 'rubocop-rails', '2.24.1', require: false
 
 group :development, :test do
   gem 'debug', platforms: %i[mri windows]
+  gem 'factory_bot_rails', '6.4.3'
   gem 'rspec-rails', '6.1.2'
   gem 'rubocop-rspec', '2.29.2', require: false
 end
