@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
+  before_action :authenticate, only: %i[index destroy]
+
+  def index
+    render json: current_user
+  end
+
   def create
     user = Sessions::AuthenticateUser.run(session_params)
 
@@ -9,6 +15,11 @@ class SessionsController < ApplicationController
     else
       render status: :unauthorized
     end
+  end
+
+  def destroy
+    session[:user_id] = nil
+    render status: :ok
   end
 
   private

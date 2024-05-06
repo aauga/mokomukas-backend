@@ -6,8 +6,12 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from ActiveRecord::RecordInvalid, with: :bad_request
 
+  def current_user
+    User.find(session[:user_id])
+  end
+
   def authenticate
-    @user ||= User.find(session[:user_id])
+    current_user
   rescue StandardError
     render status: :unauthorized
   end
