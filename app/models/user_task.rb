@@ -7,7 +7,11 @@ class UserTask < ApplicationRecord
   validates :user_lesson_id, uniqueness: { scope: %i[task_id] }
   validate :task_belongs_to_lesson
 
-  enum status: { pending: 10, correct: 20, incorrect: 30 }, _default: :pending
+  enum status: { pending: 10, finished: 20 }, _default: :pending
+
+  def finish!
+    update!(finished_at: Time.current) unless finished?
+  end
 
   private
 

@@ -4,6 +4,7 @@ FactoryBot.define do
   factory :user_lesson do
     user { create(:user) }
     lesson { create(:lesson) }
+
     started
 
     trait :started do

@@ -6,7 +6,7 @@ class CreateUserTasks < ActiveRecord::Migration[7.1]
       t.references :user_lesson, null: false, foreign_key: true
       t.references :task, null: false, foreign_key: true
       t.integer :status
-      t.date :answered_at
+      t.date :finished_at
 
       t.timestamps
     end
