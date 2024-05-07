@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_07_085459) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_07_092932) do
   create_table "clickable_contents", charset: "utf8mb4", force: :cascade do |t|
     t.text "content_code"
     t.bigint "task_id", null: false
@@ -57,6 +57,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_085459) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "clickable_contents", "tasks"
