@@ -2,6 +2,8 @@
 
 class LessonsController < ApplicationController
   def index
-    render json: Lesson.all
+    grouped_lessons = Lessons::GroupByAvailability.run(current_user)
+
+    render json: grouped_lessons
   end
 end
