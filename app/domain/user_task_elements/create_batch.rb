@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module UserTaskElements::CreateBatch
+  module_function
+
   def run(user_task)
     task_elements = user_task.task.task_elements
     task_elements.each do |task_element|

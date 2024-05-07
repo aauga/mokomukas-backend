@@ -18,11 +18,15 @@ class UserLessons::Create
   end
 
   def create_user_task_element_batch
-    UserTaskElements::CreateBatch.run(user_task)
+    user_tasks.each { |user_task| UserTaskElements::CreateBatch.run(user_task) }
   end
 
   def user_lesson
     @user_lesson ||= UserLesson.create!(user:, lesson:)
+  end
+
+  def user_tasks
+    @user_tasks ||= UserTask.where(user_lesson:, status: :pending)
   end
 
   def lesson
