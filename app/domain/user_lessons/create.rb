@@ -7,6 +7,7 @@ class UserLessons::Create
 
   def run
     create_user_task_batch
+    create_user_task_element_batch
     user_lesson
   end
 
@@ -14,6 +15,10 @@ class UserLessons::Create
 
   def create_user_task_batch
     UserTasks::CreateBatch.run(user_lesson)
+  end
+
+  def create_user_task_element_batch
+    UserTaskElements::CreateBatch.run(user_task)
   end
 
   def user_lesson

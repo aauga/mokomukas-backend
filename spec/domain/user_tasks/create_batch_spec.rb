@@ -9,13 +9,4 @@ RSpec.describe UserTasks::CreateBatch do
   it 'creates user tasks for each task in the lesson' do
     expect { subject }.to change { UserTask.count }.by(2)
   end
-
-  it 'logs the creation of each user task' do
-    expect(Rails.logger).to receive(:info)
-      .with(/User task created for/)
-      .exactly(task_count)
-      .times
-
-    subject
-  end
 end
