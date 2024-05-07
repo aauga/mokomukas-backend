@@ -10,6 +10,7 @@ class UserTasks::Finish
     raise_answered_error! if user_task.finished?
 
     user_task.finish!
+    finish_user_lesson
 
     user_task
   end
@@ -29,6 +30,10 @@ class UserTasks::Finish
   end
 
   def user_task
-    @user_task ||= UserTask.find(params[:id])
+    @user_task ||= UserTask.find_by(task_id: params[:task_id])
+  end
+
+  def finish_user_lesson
+    UserLessons::Finish.run(user_task.user_lesson)
   end
 end

@@ -13,4 +13,8 @@ class UserLesson < ApplicationRecord
   def pending_user_tasks
     user_tasks.pending
   end
+
+  def finish!
+    update!(status: :finished, finished_at: Time.current) unless finished?
+  end
 end

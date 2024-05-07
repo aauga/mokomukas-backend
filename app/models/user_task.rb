@@ -10,7 +10,7 @@ class UserTask < ApplicationRecord
   enum status: { pending: 10, finished: 20 }, _default: :pending
 
   def finish!
-    update!(finished_at: Time.current) unless finished?
+    update!(status: :finished, finished_at: Time.current) unless finished?
   end
 
   private
