@@ -6,10 +6,9 @@ Rails.application.routes.draw do
     resources :lessons, only: [:index]
     resources :tasks, only: [:show]
 
+    resources :user_lessons, only: %i[index create]
+
     resources :sessions, only: %i[index create]
     delete '/sessions', to: 'sessions#destroy'
-
-    get '/user_lessons/:lesson_id', to: 'user_lessons#show'
-    post '/user_lessons/:lesson_id', to: 'user_lessons#create'
   end
 end
