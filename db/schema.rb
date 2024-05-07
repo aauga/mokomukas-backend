@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_07_085130) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_07_085459) do
   create_table "clickable_contents", charset: "utf8mb4", force: :cascade do |t|
     t.text "content_code"
     t.bigint "task_id", null: false
@@ -40,6 +40,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_085130) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_lessons", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "lesson_id", null: false
+    t.integer "status"
+    t.date "finished_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id"], name: "index_user_lessons_on_lesson_id"
+    t.index ["user_id", "lesson_id"], name: "index_user_lessons_on_user_id_and_lesson_id", unique: true
+    t.index ["user_id"], name: "index_user_lessons_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -48,4 +60,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_085130) do
   end
 
   add_foreign_key "clickable_contents", "tasks"
+  add_foreign_key "user_lessons", "lessons"
+  add_foreign_key "user_lessons", "users"
 end
