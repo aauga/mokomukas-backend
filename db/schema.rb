@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_06_095541) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_07_085130) do
   create_table "clickable_contents", charset: "utf8mb4", force: :cascade do |t|
     t.text "content_code"
     t.bigint "task_id", null: false
@@ -27,12 +27,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_06_095541) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "tasks", charset: "utf8mb4", force: :cascade do |t|
-    t.string "content"
+  create_table "lessons_tasks", id: false, charset: "utf8mb4", force: :cascade do |t|
     t.bigint "lesson_id", null: false
+    t.bigint "task_id", null: false
+    t.index ["lesson_id", "task_id"], name: "index_lessons_tasks_on_lesson_id_and_task_id"
+    t.index ["task_id", "lesson_id"], name: "index_lessons_tasks_on_task_id_and_lesson_id"
+  end
+
+  create_table "tasks", charset: "utf8mb4", force: :cascade do |t|
+    t.string "template_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["lesson_id"], name: "index_tasks_on_lesson_id"
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
@@ -43,5 +48,4 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_06_095541) do
   end
 
   add_foreign_key "clickable_contents", "tasks"
-  add_foreign_key "tasks", "lessons"
 end
