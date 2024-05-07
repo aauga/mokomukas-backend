@@ -7,7 +7,7 @@ class UserTasks::Finish
 
   def run
     raise_forbidden_error! unless task_belongs_to_user?
-    raise_answered_error! if user_task.finished?
+    raise_finished_error! if task_or_lesson_finished?
 
     user_task.finish!
     finish_user_lesson
@@ -21,12 +21,16 @@ class UserTasks::Finish
     raise Errors::ForbiddenAccess
   end
 
-  def raise_answered_error!
+  def task_belongs_to_user?
+    user_task.user_lesson.user_id == user.id
+  end
+
+  def raise_finished_error!
     raise Errors::TaskAlreadyFinished, 'Task already finished'
   end
 
-  def task_belongs_to_user?
-    user_task.user_lesson.user_id == user.id
+  def task_or_lesson_finished?
+    user_task.finished? || user_task.user_lesson.finished?
   end
 
   def user_task
