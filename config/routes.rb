@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
     resources :user_lessons, only: %i[index create]
     put '/user_tasks/:task_id/finish', to: 'user_tasks#finish'
+    put '/user_task_elements/:task_element_id/click', to: 'user_task_elements#click'
 
     resources :sessions, only: %i[index create]
     delete '/sessions', to: 'sessions#destroy'

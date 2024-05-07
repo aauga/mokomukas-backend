@@ -8,6 +8,7 @@ module UserLessons::Finish
     return if user_lesson.pending_user_tasks.empty?
 
     user_lesson.finish!
+    user_lesson
   end
 end
 

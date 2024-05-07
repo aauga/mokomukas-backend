@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from ActiveRecord::RecordInvalid, with: :bad_request
   rescue_from Errors::ForbiddenAccess, with: :not_found
-  rescue_from Errors::TaskAlreadyFinished, with: :bad_request
+  rescue_from Errors::InvalidOperation, with: :bad_request
 
   def current_user
     return unless session[:user_id]

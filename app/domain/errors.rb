@@ -2,5 +2,5 @@
 
 module Errors
   class ForbiddenAccess < StandardError; end
-  class TaskAlreadyFinished < StandardError; end
+  class InvalidOperation < StandardError; end
 end

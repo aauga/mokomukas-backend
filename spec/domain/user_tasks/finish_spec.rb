@@ -24,7 +24,7 @@ RSpec.describe UserTasks::Finish do
     before { user_task.finish! }
 
     it 'raises error' do
-      expect { subject }.to raise_error(Errors::TaskAlreadyFinished)
+      expect { subject }.to raise_error(Errors::InvalidOperation)
     end
   end
 end

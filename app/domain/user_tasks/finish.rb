@@ -26,7 +26,7 @@ class UserTasks::Finish
   end
 
   def raise_finished_error!
-    raise Errors::TaskAlreadyFinished, 'Task already finished'
+    raise Errors::InvalidOperation, 'Task already finished'
   end
 
   def task_or_lesson_finished?
