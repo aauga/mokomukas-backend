@@ -7,6 +7,7 @@ class CreateUserTasks < ActiveRecord::Migration[7.1]
       t.references :lesson, null: false, foreign_key: true
       t.references :task, null: false, foreign_key: true
       t.boolean :correct
+      t.date :answered_at
 
       t.timestamps
     end

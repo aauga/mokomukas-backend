@@ -57,6 +57,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_111014) do
     t.bigint "lesson_id", null: false
     t.bigint "task_id", null: false
     t.boolean "correct"
+    t.date "answered_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["lesson_id"], name: "index_user_tasks_on_lesson_id"
