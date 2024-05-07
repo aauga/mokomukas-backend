@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   scope '/api' do
     resources :users, only: [:create]
     resources :lessons, only: [:index]
+    resources :tasks, only: [:show]
 
     resources :sessions, only: %i[index create]
     delete '/sessions', to: 'sessions#destroy'
