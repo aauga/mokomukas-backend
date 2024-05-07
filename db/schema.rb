@@ -44,7 +44,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_111014) do
     t.bigint "user_id", null: false
     t.bigint "lesson_id", null: false
     t.integer "status"
-    t.date "finished_at"
+    t.datetime "finished_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["lesson_id"], name: "index_user_lessons_on_lesson_id"
@@ -56,7 +56,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_111014) do
     t.bigint "user_lesson_id", null: false
     t.bigint "task_id", null: false
     t.integer "status"
-    t.date "finished_at"
+    t.datetime "finished_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["task_id"], name: "index_user_tasks_on_task_id"

@@ -6,7 +6,7 @@ class CreateUserLessons < ActiveRecord::Migration[7.1]
       t.references :user, null: false, foreign_key: true
       t.references :lesson, null: false, foreign_key: true
       t.integer :status
-      t.date :finished_at
+      t.datetime :finished_at
 
       t.timestamps
     end
