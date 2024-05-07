@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_07_111014) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_07_221445) do
   create_table "clickable_contents", charset: "utf8mb4", force: :cascade do |t|
     t.text "content_code"
     t.bigint "task_id", null: false
@@ -34,6 +34,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_111014) do
     t.index ["task_id", "lesson_id"], name: "index_lessons_tasks_on_task_id_and_lesson_id"
   end
 
+  create_table "task_elements", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "task_id", null: false
+    t.string "external_code"
+    t.boolean "correct"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_task_elements_on_task_id"
+  end
+
   create_table "tasks", charset: "utf8mb4", force: :cascade do |t|
     t.string "template_id"
     t.datetime "created_at", null: false
@@ -50,6 +59,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_111014) do
     t.index ["lesson_id"], name: "index_user_lessons_on_lesson_id"
     t.index ["user_id", "lesson_id"], name: "index_user_lessons_on_user_id_and_lesson_id", unique: true
     t.index ["user_id"], name: "index_user_lessons_on_user_id"
+  end
+
+  create_table "user_task_elements", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_task_id", null: false
+    t.bigint "task_element_id", null: false
+    t.integer "status"
+    t.datetime "clicked_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_element_id"], name: "index_user_task_elements_on_task_element_id"
+    t.index ["user_task_id"], name: "index_user_task_elements_on_user_task_id"
   end
 
   create_table "user_tasks", charset: "utf8mb4", force: :cascade do |t|
@@ -73,8 +93,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_111014) do
   end
 
   add_foreign_key "clickable_contents", "tasks"
+  add_foreign_key "task_elements", "tasks"
   add_foreign_key "user_lessons", "lessons"
   add_foreign_key "user_lessons", "users"
+  add_foreign_key "user_task_elements", "task_elements"
+  add_foreign_key "user_task_elements", "user_tasks"
   add_foreign_key "user_tasks", "tasks"
   add_foreign_key "user_tasks", "user_lessons"
 end
