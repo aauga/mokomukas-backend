@@ -3,7 +3,15 @@
 class User < ApplicationRecord
   has_secure_password
 
+  has_many :user_lessons, dependent: :destroy
+
   validates :username, presence: true, uniqueness: true
 
-  has_many :user_lessons, dependent: :destroy
+  def started_lessons
+    user_lessons.started
+  end
+
+  def finished_lessons
+    user_lessons.finished
+  end
 end
