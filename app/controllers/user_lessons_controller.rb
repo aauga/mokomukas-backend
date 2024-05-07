@@ -14,7 +14,7 @@ class UserLessonsController < ApplicationController
   end
 
   def create
-    user_lesson = UserLesson.create!(user_id: current_user.id, lesson_id: params[:lesson_id])
+    user_lesson = UserLessons::Create.run(current_user, params)
 
     render json: user_lesson
   end

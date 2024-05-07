@@ -4,7 +4,7 @@ class UserLesson < ApplicationRecord
   belongs_to :user
   belongs_to :lesson
 
-  has_many :user_tasks, dependent: :nullify
+  has_many :user_tasks, dependent: :destroy
 
   validates :user_id, uniqueness: { scope: :lesson_id }
 
