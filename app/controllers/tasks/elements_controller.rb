@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TaskElementsController < ApplicationController
+class Tasks::ElementsController < ApplicationController
   before_action :authenticate, only: %i[index]
 
   def index

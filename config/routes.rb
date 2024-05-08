@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  scope '/api' do
+  scope :api do
     resources :users, only: %i[create] do
-      post '/logout', to: 'users#logout'
+      post :logout
 
       collection do
         get :auth
@@ -12,21 +12,37 @@ Rails.application.routes.draw do
     end
 
     resources :lessons do
-      resources :user_lessons, only: %i[index create]
-
       collection do
-        get '/available', to: 'lessons#available'
+        get :available
+      end
+
+      scope module: :lessons do
+        resources :users, only: %i[index create]
       end
     end
 
     resources :tasks, only: [:show] do
-      resources :task_elements, only: [:index]
+      scope module: :tasks do
+        resources :elements, only: [:index]
+      end
     end
 
-    resources :user_tasks, only: [:index]
-    put '/user_tasks/:task_id/finish', to: 'user_tasks#finish'
+    resources :user_lessons do
+      scope module: :user_lessons do
+        resources :tasks, only: [:index]
+      end
+    end
 
-    resources :user_task_elements, only: [:index]
-    put '/user_task_elements/:task_element_id/click', to: 'user_task_elements#click'
+    resources :user_tasks, only: [:index] do
+      put :finish
+
+      scope module: :user_tasks do
+        resources :elements, only: [:index]
+      end
+    end
+
+    resources :user_task_elements do
+      put :click
+    end
   end
 end

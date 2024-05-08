@@ -21,7 +21,7 @@ class UserTasks::Finish
   end
 
   def user_task
-    @user_task ||= UserTask.find_by(task_id: params[:task_id])
+    @user_task ||= UserTask.find_by(task_id: params[:user_task_id])
   end
 
   def finish_user_lesson

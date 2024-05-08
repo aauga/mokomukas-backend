@@ -3,7 +3,7 @@
 class UserLessons::Create
   include Interactor::Initializer
 
-  initialize_with :user, :params
+  initialize_with :user, :lesson
 
   def run
     create_user_task_batch
@@ -27,9 +27,5 @@ class UserLessons::Create
 
   def user_tasks
     @user_tasks ||= UserTask.where(user_lesson:, status: :pending)
-  end
-
-  def lesson
-    @lesson ||= Lesson.find(params[:lesson_id])
   end
 end
