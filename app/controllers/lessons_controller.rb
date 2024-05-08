@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LessonsController < ApplicationController
-  def index
+  def available
     grouped_lessons = Lessons::GroupByAvailability.run(current_user)
 
     render json: grouped_lessons

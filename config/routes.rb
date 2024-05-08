@@ -3,11 +3,11 @@
 Rails.application.routes.draw do
   scope '/api' do
     resources :users, only: [:create]
-    resources :lessons, only: [:index]
     resources :tasks, only: [:show] do
       resources :task_elements, only: [:index]
     end
 
+    get '/lessons/available', to: 'lessons#available'
     resources :user_lessons, only: %i[index create]
 
     resources :user_tasks, only: [:index]
