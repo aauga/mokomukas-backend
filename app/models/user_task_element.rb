@@ -6,6 +6,7 @@ class UserTaskElement < ApplicationRecord
 
   def clicked!
     update!(
+      clicked: true,
       clicked_correctly: task_element.correct,
       clicked_at: Time.current
     )
