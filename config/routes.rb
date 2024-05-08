@@ -38,11 +38,20 @@ Rails.application.routes.draw do
 
       scope module: :user_tasks do
         resources :elements, only: [:index]
+        resources :hints, only: %i[index update] do
+          collection do
+            get :descriptions
+          end
+        end
       end
     end
 
     resources :user_task_elements do
       put :click
+    end
+
+    resources :user_hints do
+      post :buy
     end
   end
 end
