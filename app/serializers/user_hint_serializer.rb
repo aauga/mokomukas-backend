@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
 class UserHintSerializer < ActiveModel::Serializer
-  attributes :id, :hint_id, :bought
-
-  def hint
-    HintSerializer.new(object.hint).attributes
-  end
+  attributes :id, :user_task_id, :hint_id, :bought
 end
