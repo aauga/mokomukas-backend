@@ -11,12 +11,17 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :lessons do
+      resources :user_lessons, only: %i[index create]
+
+      collection do
+        get '/available', to: 'lessons#available'
+      end
+    end
+
     resources :tasks, only: [:show] do
       resources :task_elements, only: [:index]
     end
-
-    get '/lessons/available', to: 'lessons#available'
-    resources :user_lessons, only: %i[index create]
 
     resources :user_tasks, only: [:index]
     put '/user_tasks/:task_id/finish', to: 'user_tasks#finish'

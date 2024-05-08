@@ -14,10 +14,4 @@ class UserLessonsController < ApplicationController
 
     render json: user_lesson
   end
-
-  private
-
-  def user_lesson_params
-    params.require(:user_lesson).permit(:lesson_id)
-  end
 end
