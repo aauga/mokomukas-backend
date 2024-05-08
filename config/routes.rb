@@ -2,7 +2,15 @@
 
 Rails.application.routes.draw do
   scope '/api' do
-    resources :users, only: [:create]
+    resources :users, only: %i[create] do
+      post '/logout', to: 'users#logout'
+
+      collection do
+        get :auth
+        post :login
+      end
+    end
+
     resources :tasks, only: [:show] do
       resources :task_elements, only: [:index]
     end
@@ -15,8 +23,5 @@ Rails.application.routes.draw do
 
     resources :user_task_elements, only: [:index]
     put '/user_task_elements/:task_element_id/click', to: 'user_task_elements#click'
-
-    resources :sessions, only: %i[index create]
-    delete '/sessions', to: 'sessions#destroy'
   end
 end

@@ -15,8 +15,8 @@ class ApplicationController < ActionController::API
   end
 
   def authenticate
-    current_user
-  rescue StandardError
+    return if current_user
+
     render status: :unauthorized
   end
 
