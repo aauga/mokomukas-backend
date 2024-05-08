@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     resources :tasks, only: [:show]
 
     resources :user_lessons, only: %i[index create]
+
+    resources :user_tasks, only: [:index]
     put '/user_tasks/:task_id/finish', to: 'user_tasks#finish'
 
     resources :user_task_elements, only: [:index]

@@ -21,4 +21,8 @@ class UserLesson < ApplicationRecord
   def updatable?
     started?
   end
+
+  def belongs_to?(user)
+    self.user == user
+  end
 end

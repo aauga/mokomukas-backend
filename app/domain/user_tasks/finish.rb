@@ -6,8 +6,7 @@ class UserTasks::Finish
   initialize_with :user, :params
 
   def run
-    raise_forbidden_error! unless task_belongs_to_user?
-    raise_finished_error! if task_or_lesson_finished?
+    raise_error! unless user_task.updatable?
 
     user_task.finish!
     finish_user_lesson
@@ -17,20 +16,8 @@ class UserTasks::Finish
 
   private
 
-  def raise_forbidden_error!
-    raise Errors::ForbiddenAccess
-  end
-
-  def task_belongs_to_user?
-    user_task.user_lesson.user_id == user.id
-  end
-
-  def raise_finished_error!
+  def raise_error!
     raise Errors::InvalidOperation, 'Task already finished'
-  end
-
-  def task_or_lesson_finished?
-    user_task.finished? || user_task.user_lesson.finished?
   end
 
   def user_task
