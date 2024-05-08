@@ -7,6 +7,12 @@ class UserHint < ApplicationRecord
   validates :user_task, uniqueness: { scope: :hint }
   validate :same_task_id
 
+  delegate :belongs_to?, to: :user_task
+
+  def updatable?
+    !bought || user_task.updatable?
+  end
+
   private
 
   def same_task_id
