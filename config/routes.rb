@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   scope '/api' do
     resources :users, only: [:create]
     resources :lessons, only: [:index]
-    resources :tasks, only: [:show]
+    resources :tasks, only: [:show] do
+      resources :task_elements, only: [:index]
+    end
 
     resources :user_lessons, only: %i[index create]
 

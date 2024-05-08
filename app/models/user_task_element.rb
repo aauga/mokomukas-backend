@@ -4,14 +4,15 @@ class UserTaskElement < ApplicationRecord
   belongs_to :user_task
   belongs_to :task_element
 
-  enum status: { pending: 10, clicked: 20 }, _default: :pending
-
   def clicked!
-    update!(status: :clicked, clicked_at: Time.current) unless clicked?
+    update!(
+      clicked_correctly: task_element.correct,
+      clicked_at: Time.current
+    )
   end
 
   def updatable?
-    pending? || user_task.updatable?
+    clicked_at? || user_task.updatable?
   end
 
   def belongs_to?(user)

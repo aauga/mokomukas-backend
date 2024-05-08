@@ -64,7 +64,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_221445) do
   create_table "user_task_elements", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_task_id", null: false
     t.bigint "task_element_id", null: false
-    t.integer "status"
+    t.boolean "clicked"
+    t.boolean "clicked_correctly"
     t.datetime "clicked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

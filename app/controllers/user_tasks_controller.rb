@@ -6,9 +6,9 @@ class UserTasksController < ApplicationController
   def index
     render status: :not_found unless user_lesson.belongs_to?(current_user)
 
-    user_task = UserTask.find_by(user_lesson:)
+    user_tasks = UserTask.where(user_lesson:)
 
-    render json: user_task
+    render json: user_tasks
   end
 
   def finish
