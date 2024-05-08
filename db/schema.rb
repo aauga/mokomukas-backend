@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_07_221445) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_08_225214) do
   create_table "clickable_contents", charset: "utf8mb4", force: :cascade do |t|
     t.text "content_code"
     t.bigint "task_id", null: false
@@ -18,6 +18,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_221445) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["task_id"], name: "index_clickable_contents_on_task_id"
+  end
+
+  create_table "hints", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "task_id", null: false
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_hints_on_task_id"
   end
 
   create_table "lessons", charset: "utf8mb4", force: :cascade do |t|
@@ -47,6 +55,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_221445) do
     t.string "template_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_hints", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_task_id", null: false
+    t.bigint "hint_id", null: false
+    t.boolean "bought"
+    t.datetime "bought_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hint_id"], name: "index_user_hints_on_hint_id"
+    t.index ["user_task_id"], name: "index_user_hints_on_user_task_id"
   end
 
   create_table "user_lessons", charset: "utf8mb4", force: :cascade do |t|
@@ -94,7 +113,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_221445) do
   end
 
   add_foreign_key "clickable_contents", "tasks"
+  add_foreign_key "hints", "tasks"
   add_foreign_key "task_elements", "tasks"
+  add_foreign_key "user_hints", "hints"
+  add_foreign_key "user_hints", "user_tasks"
   add_foreign_key "user_lessons", "lessons"
   add_foreign_key "user_lessons", "users"
   add_foreign_key "user_task_elements", "task_elements"

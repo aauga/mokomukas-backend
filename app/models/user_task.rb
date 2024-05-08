@@ -5,6 +5,7 @@ class UserTask < ApplicationRecord
   belongs_to :task
 
   has_many :user_task_elements, dependent: :destroy
+  has_many :user_hints, dependent: :destroy
 
   validates :user_lesson_id, uniqueness: { scope: %i[task_id] }
   validate :task_belongs_to_lesson
