@@ -11,5 +11,7 @@ class CreateUserTaskElements < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
+
+    add_index :user_task_elements, %i[user_task_id task_element_id], unique: true
   end
 end

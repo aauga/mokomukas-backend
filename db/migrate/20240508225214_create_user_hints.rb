@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateUserHints < ActiveRecord::Migration[7.1]
   def change
     create_table :user_hints do |t|
@@ -8,5 +10,7 @@ class CreateUserHints < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
+
+    add_index :user_hints, %i[user_task_id hint_id], unique: true
   end
 end

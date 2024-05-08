@@ -4,6 +4,8 @@ class UserTaskElement < ApplicationRecord
   belongs_to :user_task
   belongs_to :task_element
 
+  validates :user_task, uniqueness: { scope: :task_element }
+
   def clicked!
     update!(
       clicked: true,
