@@ -17,4 +17,8 @@ class UserLesson < ApplicationRecord
   def finish!
     update!(status: :finished, finished_at: Time.current) unless finished?
   end
+
+  def updatable?
+    started?
+  end
 end

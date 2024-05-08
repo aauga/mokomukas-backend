@@ -9,4 +9,12 @@ class UserTaskElement < ApplicationRecord
   def clicked!
     update!(status: :clicked, clicked_at: Time.current) unless clicked?
   end
+
+  def updatable?
+    pending? || user_task.updatable?
+  end
+
+  def belongs_to?(user)
+    user_task.user_lesson.user == user
+  end
 end

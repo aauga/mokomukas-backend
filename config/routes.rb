@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
     resources :user_lessons, only: %i[index create]
     put '/user_tasks/:task_id/finish', to: 'user_tasks#finish'
+
+    resources :user_task_elements, only: [:index]
     put '/user_task_elements/:task_element_id/click', to: 'user_task_elements#click'
 
     resources :sessions, only: %i[index create]

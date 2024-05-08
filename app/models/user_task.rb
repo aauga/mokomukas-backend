@@ -4,6 +4,8 @@ class UserTask < ApplicationRecord
   belongs_to :user_lesson
   belongs_to :task
 
+  has_many :user_task_elements, dependent: :destroy
+
   validates :user_lesson_id, uniqueness: { scope: %i[task_id] }
   validate :task_belongs_to_lesson
 
@@ -11,6 +13,14 @@ class UserTask < ApplicationRecord
 
   def finish!
     update!(status: :finished, finished_at: Time.current) unless finished?
+  end
+
+  def belongs_to?(user)
+    user_lesson.user == user
+  end
+
+  def updatable?
+    pending? || user_lesson.updatable?
   end
 
   private
