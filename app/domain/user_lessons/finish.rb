@@ -5,7 +5,7 @@ module UserLessons::Finish
 
   def run(user_lesson)
     return if user_lesson.finished?
-    return if user_lesson.pending_user_tasks.empty?
+    return unless user_lesson.pending_user_tasks.empty?
 
     user_lesson.finish!
     user_lesson

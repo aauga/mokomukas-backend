@@ -6,9 +6,9 @@ class UserTaskElementsController < ApplicationController
   def click
     render status: :not_found unless user_task_element.belongs_to?(current_user)
 
-    user_task_element = UserTaskElements::Click.run(current_user, params)
+    result = UserTaskElements::Click.run(user_task_element)
 
-    render json: user_task_element
+    render json: result
   end
 
   private

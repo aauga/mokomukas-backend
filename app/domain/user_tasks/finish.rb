@@ -3,7 +3,9 @@
 class UserTasks::Finish
   include Interactor::Initializer
 
-  initialize_with :user, :params
+  initialize_with :user_task
+
+  delegate :user_lesson, to: :user_task
 
   def run
     raise_error! unless user_task.updatable?
@@ -20,11 +22,7 @@ class UserTasks::Finish
     raise Errors::InvalidOperation, 'Task already finished'
   end
 
-  def user_task
-    @user_task ||= UserTask.find_by(task_id: params[:user_task_id])
-  end
-
   def finish_user_lesson
-    UserLessons::Finish.run(user_task.user_lesson)
+    UserLessons::Finish.run(user_lesson)
   end
 end

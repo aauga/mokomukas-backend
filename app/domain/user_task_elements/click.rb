@@ -3,7 +3,7 @@
 class UserTaskElements::Click
   include Interactor::Initializer
 
-  initialize_with :user, :params
+  initialize_with :user_task_element
 
   def run
     raise_error! unless user_task_element.updatable?
@@ -16,9 +16,5 @@ class UserTaskElements::Click
 
   def raise_error!
     raise Errors::InvalidOperation, 'Element already clicked or task has been finished'
-  end
-
-  def user_task_element
-    @user_task_element ||= UserTaskElement.find_by(id: params[:task_element_id])
   end
 end
