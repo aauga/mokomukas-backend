@@ -10,7 +10,13 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
 
+  after_save :update_level, if: :saved_change_to_experience_points?
+
   def can_access_hint?(hint)
     user_hints.find_by(hint:).updatable?
+  end
+
+  def update_level
+    update(level: experience_points / 100)
   end
 end

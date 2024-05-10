@@ -9,6 +9,8 @@ class UserTaskElements::Click
     raise_error! unless user_task_element.updatable?
 
     user_task_element.clicked!
+    award_user
+
     user_task_element
   end
 
@@ -16,5 +18,9 @@ class UserTaskElements::Click
 
   def raise_error!
     raise Errors::InvalidOperation, 'Element already clicked or task has been finished'
+  end
+
+  def award_user
+    UserTaskElements::AwardUser.run(user_task_element)
   end
 end

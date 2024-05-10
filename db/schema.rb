@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_10_104834) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_10_102227) do
   create_table "clickable_contents", charset: "utf8mb4", force: :cascade do |t|
     t.text "content_code"
     t.bigint "task_id", null: false
@@ -44,6 +44,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_10_104834) do
 
   create_table "task_elements", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "task_id", null: false
+    t.string "external_code"
     t.boolean "correct"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -110,10 +111,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_10_104834) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "health"
-    t.decimal "money", precision: 10
-    t.integer "experience_points"
-    t.integer "level"
+    t.integer "health", default: 0
+    t.decimal "money", precision: 10, default: "0"
+    t.integer "experience_points", default: 0
+    t.integer "level", default: 0
     t.datetime "last_health_restored_at"
     t.index ["username"], name: "index_users_on_username", unique: true
   end
