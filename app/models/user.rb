@@ -20,6 +20,10 @@ class User < ApplicationRecord
     update(level: experience_points / 100)
   end
 
+  def enough_health?
+    health.positive?
+  end
+
   def give_health
     return unless health < 5
 

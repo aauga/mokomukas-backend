@@ -5,7 +5,10 @@ class UserTaskElements::Click
 
   initialize_with :user_task_element
 
+  delegate :user, to: :user_task_element
+
   def run
+    raise_health_error! unless user.enough_health?
     raise_error! unless user_task_element.updatable?
 
     user_task_element.clicked!
@@ -15,6 +18,10 @@ class UserTaskElements::Click
   end
 
   private
+
+  def raise_health_error!
+    raise Errors::InvalidOperation, 'Not enough health'
+  end
 
   def raise_error!
     raise Errors::InvalidOperation, 'Element already clicked or task has been finished'

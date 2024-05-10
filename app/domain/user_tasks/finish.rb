@@ -6,8 +6,10 @@ class UserTasks::Finish
   initialize_with :user_task
 
   delegate :user_lesson, to: :user_task
+  delegate :user, to: :user_lesson
 
   def run
+    raise_health_error! unless user.enough_health?
     raise_error! unless user_task.updatable?
 
     user_task.finish!
@@ -17,6 +19,10 @@ class UserTasks::Finish
   end
 
   private
+
+  def raise_health_error!
+    raise Errors::InvalidOperation, 'Not enough health'
+  end
 
   def raise_error!
     raise Errors::InvalidOperation, 'Task already finished'
