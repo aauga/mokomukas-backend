@@ -1,0 +1,5 @@
+:scheduler:
+  :schedule:
+    regenerate_health_job:
+      every: '10m'
+      class: Users::RegenerateHealthJob

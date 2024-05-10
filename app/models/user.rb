@@ -24,15 +24,15 @@ class User < ApplicationRecord
     health.positive?
   end
 
-  def give_health
+  def add_health
     return unless health < 5
 
-    update(health: health + 1)
+    update(health: health + 1, last_health_change_at: Time.zone.now)
   end
 
   def subtract_health
     return unless health.positive?
 
-    update(health: health - 1)
+    update(health: health - 1, last_health_change_at: Time.zone.now)
   end
 end

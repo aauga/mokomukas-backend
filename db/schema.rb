@@ -115,7 +115,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_10_102227) do
     t.decimal "money", precision: 10, default: "0"
     t.integer "experience_points", default: 0
     t.integer "level", default: 0
-    t.datetime "last_health_restored_at"
+    t.datetime "last_health_change_at", default: "1970-01-01 00:00:00"
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
