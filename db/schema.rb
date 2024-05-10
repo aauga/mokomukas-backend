@@ -44,7 +44,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_08_225214) do
 
   create_table "task_elements", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "task_id", null: false
-    t.string "external_code"
     t.boolean "correct"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
