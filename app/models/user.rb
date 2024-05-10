@@ -19,4 +19,16 @@ class User < ApplicationRecord
   def update_level
     update(level: experience_points / 100)
   end
+
+  def give_health
+    return unless health < 5
+
+    update(health: health + 1)
+  end
+
+  def subtract_health
+    return unless health.positive?
+
+    update(health: health - 1)
+  end
 end

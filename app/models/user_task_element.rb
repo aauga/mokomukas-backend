@@ -6,6 +6,10 @@ class UserTaskElement < ApplicationRecord
 
   validates :user_task, uniqueness: { scope: :task_element }
 
+  def user
+    user_task.user_lesson.user
+  end
+
   def clicked!
     update!(
       clicked: true,
