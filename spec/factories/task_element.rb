@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :task_element do
-    external_code { 'test_external_code' }
+    task
     correct
 
     trait :correct do

@@ -8,8 +8,8 @@ module UserTaskElements::AwardUser
 
     return user.subtract_health unless user_task_element.clicked_correctly?
 
-    user.money += 100
-    user.experience_points += 25
+    user.money += UserAwards::MONEY
+    user.experience_points += UserAwards::EXPERIENCE_POINTS
     user.save!
   end
 end

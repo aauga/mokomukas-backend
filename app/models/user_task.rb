@@ -17,7 +17,7 @@ class UserTask < ApplicationRecord
   end
 
   def belongs_to?(user)
-    user_lesson.user == user
+    user_lesson.belongs_to?(user)
   end
 
   def updatable?

@@ -33,7 +33,8 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :user_tasks, only: [:index] do
+    resources :user_tasks do
+      get :statistics
       put :finish
 
       scope module: :user_tasks do
