@@ -4,7 +4,12 @@ module Lessons::Daily::EndPrevious
   module_function
 
   def run
-    active_daily_lessons = Lesson.all.daily.where(ended_at: nil)
-    active_daily_lessons.find_each { |lesson| lesson.update!(ended_at: Time.current) }
+    last_daily_lesson = Lesson.all.daily.where(ended_at: nil).last
+
+    return unless last_daily_lesson
+
+    last_daily_lesson.update!(ended_at: Time.current)
+
+    Lessons::Daily::AdjustStreaks.run(last_daily_lesson)
   end
 end

@@ -4,23 +4,20 @@ class Lessons::Daily::Create
   include Interactor::Initializer
 
   def run
-    return if daily_lesson_exists?
+    return if lesson_created_today?
 
     Lessons::Daily::EndPrevious.run
-    create_daily_lesson
+
+    daily_lesson
   end
 
   private
 
-  def daily_lesson_exists?
+  def lesson_created_today?
     daily_lessons.find_by(created_at: Date.current.beginning_of_day..Date.current.end_of_day)
   end
 
-  def end_previous_daily_lessons
-    daily_lessons.where(ended_at: nil).find_each { |lesson| lesson.update!(ended_at: Time.current) }
-  end
-
-  def create_daily_lesson
+  def daily_lesson
     Lesson.create!(
       lesson_type: :daily,
       name: "Dienos užduotis ##{daily_lessons.count + 1}",
