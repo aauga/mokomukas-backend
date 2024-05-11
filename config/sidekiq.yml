@@ -3,3 +3,6 @@
     regenerate_health_job:
       every: '10m'
       class: Users::RegenerateHealthJob
+    create_daily_lesson_job:
+      every: '1h'
+      class: Lessons::CreateDailyJob
