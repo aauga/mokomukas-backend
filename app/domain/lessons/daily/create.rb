@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-class Lessons::CreateDaily
+class Lessons::Daily::Create
   include Interactor::Initializer
 
   def run
     return if daily_lesson_exists?
 
-    end_previous_daily_lessons
+    Lessons::Daily::EndPrevious.run
     create_daily_lesson
   end
 

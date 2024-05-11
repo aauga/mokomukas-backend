@@ -4,6 +4,6 @@ class Lessons::CreateDailyJob
   include Sidekiq::Job
 
   def perform
-    Lessons::CreateDaily.run
+    Lessons::Daily::Create.run
   end
 end
