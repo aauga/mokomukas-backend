@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_10_102227) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_11_164042) do
   create_table "clickable_contents", charset: "utf8mb4", force: :cascade do |t|
     t.text "content_code"
     t.bigint "task_id", null: false
@@ -33,6 +33,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_10_102227) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "lesson_type"
+    t.datetime "ended_at"
   end
 
   create_table "lessons_tasks", id: false, charset: "utf8mb4", force: :cascade do |t|
