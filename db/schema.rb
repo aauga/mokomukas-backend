@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_11_164042) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_11_170742) do
   create_table "clickable_contents", charset: "utf8mb4", force: :cascade do |t|
     t.text "content_code"
     t.bigint "task_id", null: false
@@ -118,6 +118,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_11_164042) do
     t.integer "experience_points", default: 0
     t.integer "level", default: 0
     t.datetime "last_health_change_at", default: "1970-01-01 00:00:00"
+    t.integer "day_streak", default: 0
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
