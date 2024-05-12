@@ -35,4 +35,11 @@ class User < ApplicationRecord
 
     update(health: health - 1, last_health_change_at: Time.zone.now)
   end
+
+  def subtract_money(amount)
+    return if amount.negative?
+    return unless money >= amount
+
+    update(money: money - amount)
+  end
 end

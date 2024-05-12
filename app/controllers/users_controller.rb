@@ -35,7 +35,19 @@ class UsersController < ApplicationController
     render json: Users::Streaks::FetchLeaderboard.run(current_user)
   end
 
+  def buy_resources
+    render status: :not_found unless (current_user = User.find(params[:user_id]))
+
+    result = Users::Shops::BuyResources.run(current_user, resources_params)
+
+    render json: result
+  end
+
   private
+
+  def resources_params
+    params.permit(:resource_type)
+  end
 
   def user_params
     params.require(:user).permit(:username, :password)
