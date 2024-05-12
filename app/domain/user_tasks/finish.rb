@@ -12,6 +12,7 @@ class UserTasks::Finish
     raise_health_error! unless user.enough_health?
     raise_error! unless user_task.updatable?
 
+    reduce_health
     user_task.finish!
     finish_user_lesson
 
@@ -26,6 +27,14 @@ class UserTasks::Finish
 
   def raise_error!
     raise Errors::InvalidOperation, 'Task already finished'
+  end
+
+  def reduce_health
+    not_clicked_task_elements = user_task.user_task_elements.where(clicked_at: nil)
+
+    not_clicked_task_elements.each do |user_task_element|
+      user.subtract_health if user_task_element.task_element.correct?
+    end
   end
 
   def finish_user_lesson
