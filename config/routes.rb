@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :lessons do
+    resources :lessons, only: %i[show] do
       collection do
         get :available
       end
