@@ -33,6 +33,6 @@ class Lessons::GroupByAvailability
   end
 
   def lessons
-    @lessons ||= Lesson.all
+    @lessons ||= Lesson.where(ended_at: nil)
   end
 end
