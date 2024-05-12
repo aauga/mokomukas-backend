@@ -10,6 +10,7 @@ class User < ApplicationRecord
 
   validates :username, presence: true, uniqueness: true
 
+  after_create :give_initial_resources
   after_save :update_level, if: :saved_change_to_experience_points?
 
   def can_access_hint?(hint)
@@ -41,5 +42,9 @@ class User < ApplicationRecord
     return unless money >= amount
 
     update(money: money - amount)
+  end
+
+  def give_initial_resources
+    update(money: 500, health: 5)
   end
 end
