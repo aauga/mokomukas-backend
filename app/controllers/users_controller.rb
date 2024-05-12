@@ -31,6 +31,10 @@ class UsersController < ApplicationController
     render status: :ok
   end
 
+  def leaderboard
+    render json: Users::Streaks::FetchLeaderboard.run(current_user)
+  end
+
   private
 
   def user_params

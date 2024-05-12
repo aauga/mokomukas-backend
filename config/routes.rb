@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
       collection do
         get :auth
+        get :leaderboard
         post :login
       end
     end
