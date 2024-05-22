@@ -1,24 +1,30 @@
-# README
+# Mokomukas Backend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+*Mokomukas* is a web application which teaches users safe internet usage. Users can do tasks about:
 
-Things you may want to cover:
+- phishing emails,
+- phishing websites,
+- manipulation,
+- fake social media accounts.
 
-* Ruby version
+This repository is the backend of the application. The frontend can be found [here](https://github.com/aauga/mokomukas-frontend).
 
-* System dependencies
+## Prerequisites
 
-* Configuration
+- Ruby 3.3.0
+- Ruby on Rails 7.1.3.2
+- MySQL
+- Sidekiq
 
-* Database creation
+## Setting up the project
 
-* Database initialization
+1. Clone the repository
+2. Change database configuration in `config/database.yml` to match your MySQL configuration
+3. Run `bundle install` to install dependencies
+4. Run `rails db:create` to create the database
+5. Run `rails db:migrate` to run migrations
 
-* How to run the test suite
+## Running the project
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. Run `rails s` to start the server
+2. Run `bundle exec sidekiq` to start Sidekiq
