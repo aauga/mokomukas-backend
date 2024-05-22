@@ -12,7 +12,7 @@ class UserTasks::FetchStatistics
       current_task:,
       total_tasks:,
       start_date:,
-      total_elements:,
+      total_correct_elements:,
       correctly_clicked_elements:,
       earned_money:,
       earned_experience_points:
@@ -33,8 +33,9 @@ class UserTasks::FetchStatistics
     user_task.created_at
   end
 
-  def total_elements
-    user_task_elements.count
+  def total_correct_elements
+    task_id = user_task.task.id
+    TaskElement.where(task_id:, correct: true).count
   end
 
   def correctly_clicked_elements
