@@ -7,7 +7,8 @@ class UserHint < ApplicationRecord
   validates :user_task, uniqueness: { scope: :hint }
   validate :same_task_id
 
-  delegate :belongs_to?, to: :user_task
+  delegate :user_lesson, :belongs_to?, to: :user_task
+  delegate :user, to: :user_lesson
 
   scope :bought, -> { where(bought: true).where.not(bought_at: nil) }
   scope :buyable, -> { where(bought: [nil, false], bought_at: nil) }
@@ -17,7 +18,10 @@ class UserHint < ApplicationRecord
   end
 
   def bought!
-    update!(bought: true, bought_at: Time.zone.now) if updatable?
+    return unless updatable?
+
+    update!(bought: true, bought_at: Time.zone.now)
+    user.subtract_money(100)
   end
 
   private
